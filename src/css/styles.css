@@ -1,22 +1,100 @@
-
 @import "header.css";
 
-main{
+main {
     height: 100vh;
+    position: relative;
+    height: 49vh;
+    overflow: auto;
 }
 
-body{
+body {
     display: flex;
     flex-direction: column;
     row-gap: 40px;
     background-image: url("/src/assets/images/background-pokemon-field.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: hidden;
 }
 
-.wrapper-content{
+.wrapper-content {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
     flex-wrap: wrap;
+}
+
+.loader {
+    display: none; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+}
+
+
+.input-group {
+    max-width: 300px;
+    margin: 0 auto; 
+}
+
+.card {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    border-radius: 10px 10px 0 0;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.card-text {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.type-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.type-icon {
+    width: 24px;
+    height: 24px;
+    margin: 0 5px;
+}
+
+.header-content {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-select {
+    display: inline-block;
+    width: auto; 
+}
+
+#clear-search {
+    background-color: white;
+    border: 1px solid #ced4da;
+    color: black;
+}
+
+#clear-search:hover {
+    background-color: #e9ecef;
 }
