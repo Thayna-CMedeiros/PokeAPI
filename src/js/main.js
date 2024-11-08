@@ -35,8 +35,8 @@ function renderPokemonList(filteredResults) {
     if (filteredResults.length === 0) {
         pokemonList.innerHTML = '<p>Nenhum Pokémon encontrado.</p>';
     } else {
-        filteredResults.forEach((pokemon, index) => {
-            createCard(pokemon, index + 1);
+        filteredResults.forEach(pokemon => {
+            createCard(pokemon);
         });
     }
 }
@@ -58,19 +58,13 @@ function filterPokemonList() {
     const searchTerm = searchInput.value.toLowerCase();
     const selectedType = typeFilter.value;
 
-    console.log("Termo de busca:", searchTerm);
-    console.log("Tipo selecionado:", selectedType);
-
     const filteredResults = results.filter(pokemon => {
         const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm);
         const matchesType = selectedType ? 
             (pokemon.types && Array.isArray(pokemon.types) && pokemon.types.some(type => type.type.name === selectedType)) : true;
 
-        console.log("Pokémon:", pokemon.name, "Matches Search:", matchesSearch, "Matches Type:", matchesType);
-
         return matchesSearch && matchesType;
     });
 
-    console.log("Resultados filtrados:", filteredResults);
     renderPokemonList(filteredResults);
 }
