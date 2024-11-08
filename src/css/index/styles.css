@@ -1,0 +1,93 @@
+@import "/src/css/index/header/header.css";
+@import "/src/css/index/mobile/mobile.css";
+@import "/src/css/index/card/card.css";
+
+/* GERAL */
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Altura total da tela */
+    overflow: hidden; /* Remove o scroll da página */
+    background-image: url("/src/assets/images/fundo.png");
+    background-size: cover;
+    background-position: center center; 
+    background-attachment: fixed; /* A imagem fica fixa enquanto o conteúdo rola */
+}
+
+/* BUSCAR POKEMON */
+
+.input-group {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto; 
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.form-select,
+#search-input {
+    width: 100%;
+    max-width: 300px;
+}
+
+#clear-search {
+    background-color: white;
+    border: 1px solid #ced4da;
+    color: black;
+}
+
+#clear-search:hover {
+    background-color: #e9ecef;
+}
+
+/* FILTRO DE TIPAGEM */
+
+.form-select {
+    display: inline-block;
+    width: auto; 
+}
+
+/* BOTOES */
+
+.btn-primary {
+    background-color: black;
+    border: rgb(0, 0, 0);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    border: black;
+    color: black;
+}
+
+/* MAIN */
+
+/* O container que vai ter o conteúdo rolável (cards) */
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ocupa 100% da altura da tela */
+    padding-top: 80px; /* Espaço para o header */
+}
+
+/* CARDS */
+
+/* Container para os cards com scroll */
+.wrapper-content {
+    flex: 1; 
+    overflow-y: auto; 
+    padding: 20px;
+    margin-top: -80px;
+    box-sizing: border-box;
+    margin-bottom: 370px;
+}
+/* Layout dos cards */
+.wrapper-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}

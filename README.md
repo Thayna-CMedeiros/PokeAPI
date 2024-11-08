@@ -43,7 +43,7 @@ Para executar o projeto localmente, siga os passos abaixo:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/Thayna-CMedeiros/PokeAPI.git
+   git clone https://github.com/bebshow2/guilherme-pokeapi.git
 
 2. Navegue até o diretório do projeto:
 
@@ -74,3 +74,4 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull r
 
 Sinta-se à vontade para adaptar qualquer parte conforme suas preferências!
 
+![Prototipo](src/assets/images/prototipo.png)

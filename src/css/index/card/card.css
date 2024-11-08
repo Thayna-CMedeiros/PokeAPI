@@ -1,0 +1,35 @@
+/* Cards */
+.card {
+    background-color: rgba(255, 255, 255, 0.9); /* fundo levemente transparente para o card */
+    border: 2px solid rgba(255, 255, 255, 0.2); /* borda suave */
+    border-radius: 15px; /* bordas arredondadas */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 100%;
+    max-width: 250px;
+    box-sizing: border-box;
+    color: #333; /* cor do texto mais suave */
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(255, 255, 255, 0.3); /* sombra suave ao passar o mouse */
+}
+
+/* Imagem do card */
+.card-img-top {
+    border-radius: 15px 15px 0 0;
+    object-fit: cover; /* Faz com que a imagem ocupe totalmente o espaço do card */
+}
+
+/* Título do card */
+.card-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #FFCB05; /* amarelo mais vibrante */
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+
+

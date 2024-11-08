@@ -1,0 +1,60 @@
+@media (max-width: 768px) {
+    .header-logo {
+        max-width: 80%;
+        height: auto; 
+        margin-bottom: 20px; 
+    }
+
+    .wrapper-content {
+        justify-content: center;
+        padding: 0 10px;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+
+    .input-group {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    #search-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #clear-search {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-logo {
+        max-width: 60%; 
+        height: auto; 
+        margin-bottom: 20px; 
+    }
+    
+    .header-content {
+        padding: 10px;
+    }
+
+    .card {
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .form-select {
+        width: 100%;
+    }
+
+    .input-group {
+        max-width: 90%;
+    }
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
