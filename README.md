@@ -14,24 +14,33 @@ src/                  # Diretório principal do código-fonte
 │   ├── icons/        # Ícones dos tipos dos Pokémon
 │   └── images/       # Imagens de fundo e logo
 │
-├── css/              # Contém os estilos do projeto
-│   ├── details/      # Estilos específicos da página de detalhes
-│   │   ├── details.css        # Estilos da página de detalhes
-│   │   └── typeIcons.css      # Estilo dos ícones de tipos de Pokémon
-│   ├── header.css    # Estilos do cabeçalho
-│   └── styles.css    # Estilos gerais do projeto
-│
-└── js/               # Contém os scripts JavaScript
-    ├── card/         # Funções para criar cartas de Pokémon
-    │   └── card.js
-    ├── constants/    # Organização e acesso à URL da API e elementos HTML
-    │   └── constants.js
-    ├── details/      # Funções para exibir detalhes do Pokémon
-    │   ├── details.js
-    │   └── typeIcons.js    # Associa os Pokémon aos respectivos tipos
-    └── fetchApi/     # Funções para buscar dados da API
-        └── fetchfunctions.js
-    └── main.js       # Lógica principal da aplicação
+├── css/
+│   ├── details/
+│   │   ├── mobile/
+│   │   │   └── mobile.css   # Estilos específicos para dispositivos móveis na página de detalhes
+│   │   └── details.css      # Estilos principais da página de detalhes
+│   ├── index/
+│   │   ├── card/
+│   │   │   └── card.css     # Estilos específicos para os cards de Pokémon
+│   │   ├── header/
+│   │   │   └── header.css   # Estilos do cabeçalho da página principal
+│   │   ├── mobile/
+│   │   │   └── mobile.css   # Estilos para dispositivos móveis na página principal
+│   │   └── styles.css       # Estilos gerais da página principal
+├── js/
+│   ├── card/
+│   │   └── card.js          # Funções para criar os cards de Pokémon
+│   ├── constants/
+│   │   └── constants.js     # URL da API e referências a elementos HTML
+│   ├── details/
+│   │   └── details.js       # Funções para exibir detalhes do Pokémon
+│   ├── errors/
+│   │   └── errors.js        # Funções para tratar erros nas requisições
+│   ├── fetchApi/
+│   │   └── fetchfunctions.js# Funções para buscar dados da API
+│   └── main.js              # Lógica principal da aplicação
+├── details.html             # Página de detalhes do Pokémon
+└── index.html               # Página principal com listagem de Pokémon
 
 
 ### Arquivos Principais

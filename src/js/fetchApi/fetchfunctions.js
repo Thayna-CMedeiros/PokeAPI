@@ -12,3 +12,13 @@ export async function listAllPokemons(urlApi = `${urlPokeApi}?limit=151&offset=0
         console.error(error.message);
     }
 }
+
+export async function listPokemonsByType(type) {
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+        const data = await response.json();
+        return data.pokemon.map(p => p.pokemon);
+    } catch (error) {
+        console.error("Erro ao carregar Pokémons por tipo:", error);
+    }
+}

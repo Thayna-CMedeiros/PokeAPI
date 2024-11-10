@@ -1,19 +1,25 @@
 import { createCard } from "./card/card.js";
 import { listAllPokemons } from "./fetchApi/fetchfunctions.js";
 import { urlPokeApi } from "./constants/constants.js";
+import { listPokemonsByType } from "./fetchApi/fetchfunctions.js";
 
+let debounceTimeout;
 let results = [];
 let loading = false;
 let offset = 0;
-const limit = 20; // Quantidade de Pokémons carregados por vez
+const limit = 150; // Quantidade de Pokémons carregados por vez
 
 // Função para inicializar a página
 async function init() {
     try {
-        // Faz a primeira requisição para carregar os Pokémons
-        const { results: pokemons } = await listAllPokemons(`${urlPokeApi}?limit=${limit}&offset=${offset}`);
-        results = await getAllPokemonDetails(pokemons);
-        applyFilterAndRender();
+        const allPokemons = await listAllPokemons(`${urlPokeApi}?limit=10000&offset=0`);
+        results = allPokemons.results.map(pokemon => ({ name: pokemon.name, url: pokemon.url })); // Salva apenas nomes e URLs
+
+        // Carrega os primeiros 150 detalhes completos para a exibição inicial
+        const initialPokemons = results.slice(0, 150);
+        const pokemonDetails = await getAllPokemonDetails(initialPokemons);
+        
+        renderPokemonList(pokemonDetails); // Renderiza a lista inicial com os detalhes completos dos primeiros 150
     } catch (error) {
         console.error("Erro ao carregar os Pokémons:", error);
     }
@@ -32,26 +38,39 @@ async function getAllPokemonDetails(pokemons) {
     return details;
 }
 
-// Função para aplicar filtros de busca e tipo e renderizar os Pokémons filtrados
-function applyFilterAndRender() {
+
+
+async function applyFilterAndRender(ignoreTypeFilter = false) {
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
     const selectedType = document.getElementById('type-filter').value;
-    
-    let filteredResults = results;
 
-    // Filtro de nome
+    let filteredResults;
+
+    // Se houver termo de busca, filtra localmente por nome
     if (searchTerm) {
-        filteredResults = filteredResults.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm));
+        filteredResults = results.filter(pokemon => 
+            pokemon.name.toLowerCase().includes(searchTerm)
+        );
+
+        // Busca os detalhes completos apenas dos resultados filtrados
+        const detailedResults = await getAllPokemonDetails(filteredResults);
+        renderPokemonList(detailedResults);
+        return;
     }
 
-    // Filtro de tipo
-    if (selectedType) {
-        filteredResults = filteredResults.filter(pokemon => pokemon.types.some(type => type.type.name === selectedType));
+    // Se não há termo de busca, aplica o filtro de tipo
+    if (selectedType && !ignoreTypeFilter) {
+        const pokemonsByType = await listPokemonsByType(selectedType);
+        filteredResults = await getAllPokemonDetails(pokemonsByType);
+    } else {
+        // Caso contrário, exibe os primeiros 150
+        filteredResults = await getAllPokemonDetails(results.slice(0, 150));
     }
 
-    // Renderiza os Pokémons filtrados
     renderPokemonList(filteredResults);
 }
+
+
 
 // Função para renderizar os cards dos Pokémons
 function renderPokemonList(filteredResults) {
@@ -99,8 +118,32 @@ document.querySelector('.wrapper-content').addEventListener('scroll', () => {
 });
 
 // Event listeners para o filtro de busca e tipo
-document.getElementById('search-input').addEventListener('input', applyFilterAndRender);
-document.getElementById('type-filter').addEventListener('change', applyFilterAndRender);
+document.getElementById('search-input').addEventListener('input', (event) => {
+    // Limpa o timeout anterior para reiniciar o contador
+    clearTimeout(debounceTimeout);
+
+    // Obtém o valor do campo de pesquisa e o transforma em minúsculo
+    const searchText = event.target.value.trim().toLowerCase();
+
+    // Define o timeout para chamar a função de busca após 300ms
+    debounceTimeout = setTimeout(() => {
+        applyFilterAndRender(); // Aplica o filtro e renderiza os resultados
+    }, 300);
+});
+
+
+
+document.getElementById('type-filter').addEventListener('change', async () => {
+    const selectedType = document.getElementById('type-filter').value;
+    
+    if (selectedType === '') {
+        // Recarrega o conjunto inicial de Pokémons (150 primeiros)
+        await init();  // Rechama a função init para resetar a lista
+    } else {
+        applyFilterAndRender();
+    }
+});
+
 
 // Evento para limpar a busca
 document.getElementById('clear-search').addEventListener('click', () => {
